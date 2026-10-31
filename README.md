@@ -1,6 +1,6 @@
-[![Unreal Engine](https://img.shields.io/badge/Unreal_Engine-5.8-black?logo=unreal-engine&style=for-the-badge)](https://www.unrealengine.com/)
-
 # UE5 第一人称射击游戏（FPS + 背包系统）
+
+[![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.8-0E1128?logo=unrealengine&logoColor=white)](https://github.com/TsinCore/UE5-FPS-Demo)
 
 基于 Unreal Engine 5 + C++ 开发的第一人称射击 Demo，包含角色移动、射击、敌人 AI、血量 HUD 和背包系统。核心玩法逻辑全部使用 C++ 实现，蓝图仅负责 UI 布局与资源挂接。
 
@@ -69,15 +69,17 @@
 - 枪模型作为 Skeletal Mesh Component 附加到手臂，匹配持枪姿势
 
 ## 项目结构
+
+```
 Source/demo/
-├── FPSCharacter.h/.cpp # 玩家角色：移动、射击、拾取、背包、血量
-├── Weapon.h/.cpp # 武器：开火、弹药、射速、射线检测、特效
-├── EnemyCharacter.h/.cpp # 敌人：状态机、巡逻、追击、攻击、死亡
-├── InventoryComponent.h/.cpp # 背包组件：物品管理、增删查、委托
-├── ItemData.h/.cpp # 物品结构体与枚举
-├── PickupItem.h/.cpp # 可拾取物品 Actor
-└── demo.Build.cs # 模块依赖
-plaintext
+├── FPSCharacter.h/.cpp        # 玩家角色：移动、射击、拾取、背包、血量
+├── Weapon.h/.cpp              # 武器：开火、弹药、射速、射线检测、特效
+├── EnemyCharacter.h/.cpp      # 敌人：状态机、巡逻、追击、攻击、死亡
+├── InventoryComponent.h/.cpp  # 背包组件：物品管理、增删查、委托
+├── ItemData.h/.cpp            # 物品结构体与枚举
+├── PickupItem.h/.cpp          # 可拾取物品 Actor
+└── demo.Build.cs              # 模块依赖
+```
 
 ## 运行方式
 
