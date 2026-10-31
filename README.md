@@ -1,8 +1,12 @@
+[![Unreal Engine](https://img.shields.io/badge/Unreal_Engine-5.8-black?logo=unreal-engine&style=for-the-badge)](https://www.unrealengine.com/)
+
 # UE5 第一人称射击游戏（FPS + 背包系统）
 
 基于 Unreal Engine 5 + C++ 开发的第一人称射击 Demo，包含角色移动、射击、敌人 AI、血量 HUD 和背包系统。核心玩法逻辑全部使用 C++ 实现，蓝图仅负责 UI 布局与资源挂接。
 
 ![游戏截图](docs/screenshot.png)
+
+![演示 GIF](docs/demo.gif)
 
 ## 演示视频
 
