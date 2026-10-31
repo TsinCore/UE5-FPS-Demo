@@ -69,7 +69,6 @@
 - 枪模型作为 Skeletal Mesh Component 附加到手臂，匹配持枪姿势
 
 ## 项目结构
-
 Source/demo/
 ├── FPSCharacter.h/.cpp # 玩家角色：移动、射击、拾取、背包、血量
 ├── Weapon.h/.cpp # 武器：开火、弹药、射速、射线检测、特效
@@ -78,6 +77,7 @@ Source/demo/
 ├── ItemData.h/.cpp # 物品结构体与枚举
 ├── PickupItem.h/.cpp # 可拾取物品 Actor
 └── demo.Build.cs # 模块依赖
+plaintext
 
 ## 运行方式
 
