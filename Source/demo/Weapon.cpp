@@ -47,10 +47,6 @@ void AWeapon::Fire()
 
     bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params);
 
-    //FColor LineColor = bHit ? FColor::Red : FColor::Green;
-    //FVector LineEnd = bHit ? Hit.ImpactPoint : End;
-    //DrawDebugLine(GetWorld(), Start, LineEnd, LineColor, false, 2.f, 0, 1.f);
-
     if (bHit)
     {
         UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s"), *Hit.GetActor()->GetName());
@@ -61,6 +57,8 @@ void AWeapon::Fire()
 
         if (HitEffect)
         {
+            double SpawnStartTime = FPlatformTime::Seconds();
+
             UNiagaraFunctionLibrary::SpawnSystemAttached(
                 HitEffect,
                 Hit.GetActor()->GetRootComponent(),
@@ -68,8 +66,15 @@ void AWeapon::Fire()
                 Hit.ImpactPoint,
                 Hit.ImpactNormal.Rotation(),
                 EAttachLocation::KeepWorldPosition,
+                true,
+                true,
+                ENCPoolMethod::AutoRelease,
                 true
             );
+
+            double SpawnEndTime = FPlatformTime::Seconds();
+            double SpawnElapsedMs = (SpawnEndTime - SpawnStartTime) * 1000.0;
+            UE_LOG(LogTemp, Warning, TEXT("[Perf] Spawn Cost: %f ms"), SpawnElapsedMs);
         }
     }
 }

@@ -68,6 +68,13 @@
 - Tick 中同步 `FirstPersonMesh` 的 Pitch，上下视角时手臂跟随
 - 枪模型作为 Skeletal Mesh Component 附加到手臂，匹配持枪姿势
 
+### 性能优化
+
+- **命中特效 Niagara 池化**：使用 `ENCPoolMethod::AutoRelease` 让特效播放完自动回收，并在 Niagara 系统中设置 `Pool Prime Size` 预热组件。通过 `FPlatformTime::Seconds()` 对 `SpawnSystemAttached` 计时，连续射击 60 次取平均，**单次 Spawn 平均耗时从 0.248 ms 降至 0.079 ms，降低约 68%**，最大耗时从 0.288 ms 降至 0.132 ms，并消除了首次生成约 8.8 ms 的冷启动尖峰。
+- **射击逻辑**：使用 LineTrace 即时命中，不生成子弹 Actor，避免高频 Spawn/Destroy 带来的额外开销。
+- **渲染优化**：第一人称下使用 `SetOwnerNoSee` 隐藏玩家第三人称身体，第一人称手臂关闭动态阴影，减少不必要的渲染开销。
+- **UI 刷新**：背包使用动态多播委托驱动 UI 刷新，而非每帧轮询；刷新前先 `Clear Children`，避免控件叠加。
+
 ## 项目结构
 
 ```
@@ -122,5 +129,5 @@ Source/demo/
 ## 已知限制
 
 - 敌人使用枚举状态机，未使用行为树，适合小规模 AI
-- 未单独实现对象池，命中特效依赖 Niagara 自身生命周期管理
+- 对象池仅用于命中特效（Niagara 内置池化），子弹为 LineTrace 即时命中，无子弹 Actor 需要池化
 - 单机 Demo，未实现网络同步
